@@ -2,13 +2,14 @@
 
 import { SignupSchema } from "@/validators/sign-up-validator";
 import * as v from "valibot";
+import argon2 from "argon2";
 
-type Response =
+type Res =
   | { success: true }
   | { success: false; error: v.FlatErrors<undefined>; statusCode: 400 }
   | { success: false; error: string; statusCode: 500 };
 
-export async function signupUserAction(values: unknown): Promise<Response> {
+export async function signupUserAction(values: unknown): Promise<Res> {
   const parsedValues = v.safeParse(SignupSchema, values);
 
   if (!parsedValues.success) {
@@ -20,6 +21,12 @@ export async function signupUserAction(values: unknown): Promise<Response> {
   const { name, email, password } = parsedValues.output;
 
   try {
+
+    const hashedPassword = await argon2.hash(password);
+
+
+
+
     return { success: true };
   } catch (error) {
     console.error(error);

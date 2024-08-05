@@ -32,7 +32,7 @@ function SignUpForm() {
     const res = await signupUserAction(data);
 
     if (res.success) {
-      console.log("success");
+      reset();
     } else {
       switch (res.statusCode) {
         case 400: {
