@@ -2,18 +2,10 @@ import * as v from "valibot";
 
 export const SignupSchema = v.pipe(
   v.object({
-    name: v.optional(
-      v.union([
-        v.pipe(
-          v.literal(""),
-          v.transform(() => undefined)
-        ),
-        v.pipe(
-          v.string(),
-          v.nonEmpty("Name cannot be empty"),
-          v.minLength(3, "Name must be at least 3 characters long")
-        ),
-      ])
+    name: v.pipe(
+      v.string(),
+      v.nonEmpty("Name cannot be empty"),
+      v.minLength(3, "Name must be at least 3 characters long")
     ),
     email: v.pipe(v.string(), v.nonEmpty("Email cannot be empty"), v.email()),
     password: v.pipe(
