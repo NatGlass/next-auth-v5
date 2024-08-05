@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 function Navbar() {
   return (
     <header className="h-16 border-b">
-      <nav className="flex justify-between items-center h-full px-6">
+      <nav className="flex justify-between items-center h-full px-6 container">
         <Link href="/">
           <span className="font-bold text-3xl">
             Next Auth
