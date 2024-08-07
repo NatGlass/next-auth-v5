@@ -13,9 +13,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { type SignupInput, SignupSchema } from "@/validators/sign-up-validator";
 import { valibotResolver } from "@hookform/resolvers/valibot";
+import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 function SignUpForm() {
+  const [success, setSuccess] = useState(false);
   const form = useForm<SignupInput>({
     resolver: valibotResolver(SignupSchema),
     defaultValues: {
@@ -32,6 +35,7 @@ function SignUpForm() {
     const res = await signupUserAction(data);
 
     if (res.success) {
+      setSuccess(true);
       reset();
     } else {
       switch (res.statusCode) {
@@ -53,6 +57,21 @@ function SignUpForm() {
       }
     }
   };
+
+  if (success) {
+    return (
+      <div>
+        <p>User created successfully</p>
+        <span>
+          Click{" "}
+          <Link href="/auth/sign-in" className="underline text-primary">
+            here
+          </Link>
+          to sign in.
+        </span>
+      </div>
+    );
+  }
 
   return (
     <Form {...form}>
