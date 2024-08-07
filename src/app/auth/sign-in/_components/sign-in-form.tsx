@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { type SigninInput, SigninSchema } from "@/validators/sign-in-validator";
@@ -31,8 +32,15 @@ function SignInForm() {
     if (res.success) {
       reset();
     } else {
+      switch (res.statusCode) {
+        case 500: {
+          const error = res.error || "Internal server error";
+          setError("password", { message: error });
+        }
+      }
     }
   };
+
 
   return (
     <Form {...form}>
@@ -54,6 +62,7 @@ function SignInForm() {
                   autoComplete="email"
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -70,6 +79,7 @@ function SignInForm() {
                   autoComplete="current-password"
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

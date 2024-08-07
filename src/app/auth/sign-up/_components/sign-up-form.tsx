@@ -9,6 +9,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { type SignupInput, SignupSchema } from "@/validators/sign-up-validator";
@@ -93,6 +94,7 @@ function SignUpForm() {
                   autoComplete="name"
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -113,6 +115,7 @@ function SignUpForm() {
               <FormDescription>
                 Must be an email you can access for email verification
               </FormDescription>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -126,6 +129,7 @@ function SignUpForm() {
                 <Input type="password" {...field} autoComplete="new-password" />
               </FormControl>
               <FormDescription>Minimum 6 characters</FormDescription>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -138,6 +142,7 @@ function SignUpForm() {
               <FormControl>
                 <Input type="password" {...field} autoComplete="new-password" />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
