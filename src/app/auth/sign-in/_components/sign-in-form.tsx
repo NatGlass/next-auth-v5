@@ -30,9 +30,13 @@ function SignInForm() {
     const res = await signinUserAction(data);
 
     if (res.success) {
-      reset();
+      window.location.href = "/profile";
     } else {
       switch (res.statusCode) {
+        case 401: {
+          setError("password", { message: res.error });
+          break;
+        }
         case 500: {
           const error = res.error || "Internal server error";
           setError("password", { message: error });
@@ -40,7 +44,6 @@ function SignInForm() {
       }
     }
   };
-
 
   return (
     <Form {...form}>

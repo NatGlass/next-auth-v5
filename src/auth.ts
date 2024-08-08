@@ -40,4 +40,4 @@ const nextAuth = NextAuth({
   ],
 });
 
-export const { signIn } = nextAuth;
+export const { signIn, auth, signOut } = nextAuth;
