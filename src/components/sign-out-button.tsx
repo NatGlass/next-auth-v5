@@ -13,9 +13,7 @@ function SignOutButton() {
     <>
       <Button
         variant="destructive"
-        size="sm"
         onClick={handleSignOut}
-        className="mt-8"
       >
         Sign Out
       </Button>

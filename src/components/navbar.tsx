@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "./ui/button";
+import NavLinks from "./nav-links";
 
 function Navbar() {
   return (
@@ -13,13 +13,8 @@ function Navbar() {
             </span>
           </span>
         </Link>
-        <div className="gap-4 flex">
-          <Link href="/auth/sign-in">
-            <Button variant="outline">Sign in</Button>
-          </Link>
-          <Link href="/auth/sign-up">
-            <Button>Sign up</Button>
-          </Link>
+        <div className="flex items-center h-full">
+          <NavLinks />
         </div>
       </nav>
     </header>
