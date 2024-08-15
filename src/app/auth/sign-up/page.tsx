@@ -1,11 +1,13 @@
 import Link from "next/link";
 import SignUpForm from "./_components/sign-up-form";
+import OAuthSignInButtons from "@/components/oauth-sign-in-buttons";
 
 function SignUpPage() {
   return (
     <div className="container mt-8">
       <h1 className="text-4xl font-bold tracking-tight text-center">Sign Up</h1>
       <SignUpForm />
+      <OAuthSignInButtons signup />
       <div className="text-center mt-2">
         <p>
           Already have an account?{" "}
