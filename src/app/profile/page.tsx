@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import SignOutButton from "@/components/sign-out-button";
 import { Button } from "@/components/ui/button";
 import type { User } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
 
 async function ProfilePage() {
@@ -27,6 +28,9 @@ const SignedIn = ({ user }: { user: User }) => {
       <h2 className="text-2xl font-bold tracking-tight text-center">
         User Information
       </h2>
+      {user.image && (
+        <Image src={user.image} alt={user.name || ""} width={64} height={64} />
+      )}
       <table className="mt-8 table-auto divide-y">
         <thead>
           <tr className="divide-x">

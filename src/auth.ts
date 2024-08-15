@@ -1,6 +1,7 @@
 import argon2 from "argon2";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import * as v from "valibot";
 import { findUserByEmail } from "./resources/user-queries";
@@ -41,7 +42,11 @@ const nextAuth = NextAuth({
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    })
+    }),
+    Github({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
   ],
 });
 
