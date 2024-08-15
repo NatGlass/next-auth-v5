@@ -1,17 +1,38 @@
-import { auth } from "@/auth";
+"use client";
+import { Loader2Icon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import SignOutButton from "./sign-out-button";
 import { Button } from "./ui/button";
 
-async function NavLinks() {
-  const session = await auth();
+function NavLinks() {
+  const session = useSession();
 
-  if (!session || !session.user) return <SignedOut />;
+  switch (session.status) {
+    case "loading":
+      return <Loading />;
 
-  return <SignedIn />;
+    case "unauthenticated":
+      return <SignedOut />;
+
+    case "authenticated":
+      return <SignedIn />;
+
+    default:
+      return null;
+  }
 }
 
 export default NavLinks;
+
+const Loading = () => {
+  return (
+    <Button variant="ghost">
+      Loading...
+      <Loader2Icon className="w-4 h-4 animate-spin ml-2" />
+    </Button>
+  );
+};
 
 const SignedIn = () => {
   return (
