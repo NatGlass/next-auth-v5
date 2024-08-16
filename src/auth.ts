@@ -7,6 +7,7 @@ import Credentials from "next-auth/providers/credentials";
 import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import * as v from "valibot";
+import { OAuthVerifyEmailAction } from "./actions/verify-oauth-email-action";
 import { findUserByEmail } from "./resources/user-queries";
 import { SigninSchema } from "./validators/sign-in-validator";
 
@@ -25,8 +26,6 @@ const nextAuth = NextAuth({
   },
   callbacks: {
     jwt({ token, user }) {
-      console.log("user", user);
-
       if (user?.id) token.id = user.id;
       if (user?.role) token.role = user.role;
 
@@ -37,6 +36,14 @@ const nextAuth = NextAuth({
       session.user.role = token.role;
 
       return session;
+    },
+  },
+  events: {
+    async linkAccount({ user, account }) {
+      // verify the users email if the provider is google or github
+      if (["google", "github"].includes(account.provider)) {
+        if (user.email) await OAuthVerifyEmailAction(user.email);
+      }
     },
   },
   providers: [

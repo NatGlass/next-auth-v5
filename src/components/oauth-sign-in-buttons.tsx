@@ -1,5 +1,5 @@
 "use client";
-import { oAuthSignInAction } from "@/actions/oAuthSignInAction";
+import { oAuthSignInAction } from "@/actions/oauth-signin-action";
 import {
   SiGithub,
   SiGithubHex,
