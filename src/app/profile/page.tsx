@@ -37,6 +37,7 @@ const SignedIn = ({ user }: { user: User }) => {
             <th className="px-6 py-3 text-start">ID</th>
             <th className="px-6 py-3 text-start">Name</th>
             <th className="px-6 py-3 text-start">Email</th>
+            <th className="px-6 py-3 text-start">Role</th>
           </tr>
         </thead>
         <tbody>
@@ -44,6 +45,7 @@ const SignedIn = ({ user }: { user: User }) => {
             <th className="px-6 py-3 text-start">{user.id}</th>
             <th className="px-6 py-3 text-start">{user.name}</th>
             <th className="px-6 py-3 text-start">{user.email}</th>
+            <th className="px-6 py-3 text-start">{user.role}</th>
           </tr>
         </tbody>
       </table>
