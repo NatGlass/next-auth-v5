@@ -1,3 +1,5 @@
+import db from "@/drizzle";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import argon2 from "argon2";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -8,10 +10,25 @@ import { findUserByEmail } from "./resources/user-queries";
 import { SigninSchema } from "./validators/sign-in-validator";
 
 const nextAuth = NextAuth({
+  adapter: DrizzleAdapter(db), // Needed to create a user from oAuth
   session: { strategy: "jwt" },
   secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/auth/sign-in",
+  },
+  callbacks: {
+    jwt({ token, user }) {
+      console.log("user", user);
+
+      if (user?.id) token.id = user.id;
+
+      console.log("token in jwt", token);
+      return token;
+    },
+    session({ session, token }) {
+      session.user.id = token.id;
+      return session;
+    },
   },
   providers: [
     Credentials({

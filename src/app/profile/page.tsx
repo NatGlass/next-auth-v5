@@ -34,12 +34,14 @@ const SignedIn = ({ user }: { user: User }) => {
       <table className="mt-8 table-auto divide-y">
         <thead>
           <tr className="divide-x">
+            <th className="px-6 py-3 text-start">ID</th>
             <th className="px-6 py-3 text-start">Name</th>
             <th className="px-6 py-3 text-start">Email</th>
           </tr>
         </thead>
         <tbody>
           <tr className="divide-x">
+            <th className="px-6 py-3 text-start">{user.id}</th>
             <th className="px-6 py-3 text-start">{user.name}</th>
             <th className="px-6 py-3 text-start">{user.email}</th>
           </tr>
