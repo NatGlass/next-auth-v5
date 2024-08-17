@@ -15,3 +15,17 @@ export const findUserByEmail = async (
 
   return user;
 };
+
+export const findUserById = async (
+  id: string
+): Promise<typeof users.$inferSelect> => {
+  const user = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, id))
+    .then((res) => res[0] ?? null);
+
+  if (!user) throw new Error("User not found");
+
+  return user;
+};
