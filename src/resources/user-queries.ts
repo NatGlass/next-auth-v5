@@ -2,7 +2,7 @@ import db from "@/drizzle";
 import "server-only";
 
 import { lower, users } from "@/drizzle/schema";
-import { eq } from "drizzle-orm";
+import { eq, getTableColumns } from "drizzle-orm";
 
 export const findUserByEmail = async (
   email: string
@@ -18,9 +18,11 @@ export const findUserByEmail = async (
 
 export const findUserById = async (
   id: string
-): Promise<typeof users.$inferSelect> => {
+): Promise<Omit<typeof users.$inferSelect, "password">> => {
+  const {password, ...userWithoutPassword} = getTableColumns(users);
+
   const user = await db
-    .select()
+    .select(userWithoutPassword)
     .from(users)
     .where(eq(users.id, id))
     .then((res) => res[0] ?? null);
