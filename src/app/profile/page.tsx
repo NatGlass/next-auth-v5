@@ -5,10 +5,22 @@ import type { User } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 
+// type DatabaseUser = Omit<typeof users.$inferSelect, "password">;
+
 async function ProfilePage() {
   const session = await auth();
 
   if (!session || !session.user) return <SignedOut />;
+
+  const sessionUserId = session.user.id;
+
+  // Way to access user info from the database
+  // let databaseUser: DatabaseUser | null = null;
+
+  // if (sessionUserId) {
+  //   databaseUser = await findUserById(sessionUserId);
+  //   console.log(databaseUser);
+  // }
 
   console.log(session?.user);
   return (
